@@ -62,17 +62,26 @@ addBook('On the Road', 'Jack Kerouac', 307, false);
 addBook('Baptism of Fire', 'Andrzej Sapkowski', 343, false);
 addBook('Time of Contempt', 'Andrzej Sapkowski', 331, false);
 getBooks();
-//deleteBook(0);
-//getBooks();
 
-const button = document.querySelector('.new');
 const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('.close-modal');
+const closeModalButton = document.querySelector('.form__button-close');
+const form = document.querySelector('.form');
+const newBookButton = document.querySelector('.new');
 
-button.addEventListener('click', () => {
+newBookButton.addEventListener('click', () => {
   modal.showModal();
 });
 
-closeModal.addEventListener('click', () => {
+closeModalButton.addEventListener('click', () => {
   modal.close();
 });
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  addBook(data.title, data.author, data.pages, false);
+  showBook(data.title, data.author, data.pages, false);
+  form.reset();
+  modal.close();
+})

@@ -41,11 +41,26 @@ body {
 .form__field {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: .7rem;
 }
 
+.form__input {
+  padding: .5rem;
+  font-size: 1rem;
+}
+
+.form__button {
+  margin-top: 1rem;
+  float: right;
+}
+
+.form__button-close {
+  margin-right: .4rem
+}
+
 .modal {
-  width: 350px;
+  width: 300px;
 }
 
 button {

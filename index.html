@@ -19,22 +19,24 @@
   <div class="main"></div>
 
   <dialog class="modal">
-    <form class="form" action="#" method="#" novalidate>
+    <form class="form" id="form" action="#" method="#">
       <div class="form__field">
-        <label class="form__label" for="title">Title</label>
+        <label class="form__label" for="title">title</label>
         <input class="form__input" type="text" id="title" name="title" autocomplete="title" required>
       </div>
       <div class="form__field">
-        <label class="form__label" for="author">Author</label>
+        <label class="form__label" for="author">author</label>
         <input class="form__input" type="text" id="author" name="author" autocomplete="author" required>
       </div>
       <div class="form__field">
-        <label class="form__label" for="pages">Pages</label>
-        <input class="form__input" type="text" id="pages" name="pages" autocomplete="pages" required>
+        <label class="form__label" for="pages">pages</label>
+        <input class="form__input" type="number" id="pages" name="pages" autocomplete="pages" required>
       </div>
     </form>
-    <button class="submit-modal">submit</button>
-    <button class="close-modal">close</button>
+    <div class="form__button">
+      <button class="form__button-close">close</button>
+      <button type="submit" class="form__button-submit" form="form">submit</button>
+    </div>
   </dialog>
   <script src="scripts/index.js"></script>
 </body>
