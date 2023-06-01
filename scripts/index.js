@@ -62,7 +62,7 @@ function showBook(title, author, pages, isRead) {
 }
 
 function deleteBook(title) {
-  index = library.findIndex(book => book.title === title);
+  const index = library.findIndex(book => book.title === title);
   library.splice(index, 1);
 }
 
