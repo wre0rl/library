@@ -80,8 +80,10 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.target).entries());
-  addBook(data.title, data.author, data.pages, false);
-  showBook(data.title, data.author, data.pages, false);
+  const readStatus = data.read === 'on' ? true : false;
+  
+  addBook(data.title, data.author, data.pages, readStatus);
+  showBook(data.title, data.author, data.pages, readStatus);
   form.reset();
   modal.close();
 })

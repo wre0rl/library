@@ -40,9 +40,16 @@ body {
 
 .form__field {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: .7rem;
+}
+
+.form__field:last-child .form__input {
+  transform: scale(1.5);
+}
+
+.form__label {
+  width: 4rem;
 }
 
 .form__input {
