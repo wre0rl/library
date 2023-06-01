@@ -1,27 +1,27 @@
 let library = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, isRead) {
 	this.title = title
   this.author = author
   this.pages = pages
-  this.read = read
+  this.isRead = isRead
 }
 
 Book.prototype.toggleReadStatus = function() {
-  this.read = !this.read;
+  this.isRead = !this.isRead;
 }
 
-function addBook(title, author, pages, read) {
-  library = [...library, new Book(title, author, pages, read)];
+function addBook(title, author, pages, isRead) {
+  library = [...library, new Book(title, author, pages, isRead)];
 }
 
 function getBooks() {
   for (const book of library) {
-    showBook(book.title, book.author, book.pages, book.read)
+    showBook(book.title, book.author, book.pages, book.isRead)
   }
 }
 
-function showBook(title, author, pages, read) {
+function showBook(title, author, pages, isRead) {
   const booksContainer = document.querySelector('.main');
   const book = document.createElement('div');
   book.setAttribute('class', 'main__item');
@@ -35,7 +35,7 @@ function showBook(title, author, pages, read) {
   bookDeleteImg.setAttribute('src', 'images/icons/close.svg');
   bookHeader.appendChild(bookDeleteImg);
   const bookToggleReadImg = document.createElement('img');
-  const imgSrc = read ? 'eye-check-outline' : 'eye-remove-outline';
+  const imgSrc = isRead ? 'eye-check-outline' : 'eye-remove-outline';
   bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
   bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
   bookHeader.appendChild(bookToggleReadImg);
@@ -58,7 +58,7 @@ function showBook(title, author, pages, read) {
   const bookRead = document.createElement('div');
   bookRead.setAttribute('class', 'main__item-read');
   book.appendChild(bookRead);
-  bookRead.innerText = read;
+  bookRead.innerText = isRead;
 }
 
 function deleteBook(title) {
@@ -109,12 +109,12 @@ document.addEventListener("click", function(e){
 
     // Rerender
     const bookToggleReadImg = thisTitle.previousElementSibling.lastChild;
-    const imgSrc = library[index].read ? 'eye-check-outline' : 'eye-remove-outline';
+    const imgSrc = library[index].isRead ? 'eye-check-outline' : 'eye-remove-outline';
     bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
     bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
 
     const readStatus = thisTitle.parentElement.lastChild;
-    readStatus.innerText = library[index].read;
+    readStatus.innerText = library[index].isRead;
   }
 });
 
@@ -140,7 +140,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.target).entries());
-  const readStatus = data.read === 'on' ? true : false;
+  const readStatus = data.isRead === 'on' ? true : false;
   
   addBook(data.title, data.author, data.pages, readStatus);
   showBook(data.title, data.author, data.pages, readStatus);
