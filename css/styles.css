@@ -37,12 +37,18 @@ body {
   flex-direction: column;
 }
 
-.main__item-header-delete {
+.main__item-header-delete,
+.main__item-header-read-status {
   height: 25px;
   float: right;
 }
 
-.main__item-header-delete:hover {
+.main__item-header-read-status {
+  margin-right: .5rem;
+}
+
+.main__item-header-delete:hover,
+.main__item-header-read-status:hover {
   cursor: grab;
 }
 

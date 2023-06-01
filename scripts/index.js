@@ -7,6 +7,10 @@ function Book(title, author, pages, read) {
   this.read = read
 }
 
+Book.prototype.toggleReadStatus = function() {
+  this.read = !this.read;
+}
+
 function addBook(title, author, pages, read) {
   library = [...library, new Book(title, author, pages, read)];
 }
@@ -26,10 +30,15 @@ function showBook(title, author, pages, read) {
   const bookHeader = document.createElement('div');
   bookHeader.setAttribute('class', 'main__item-header');
   book.appendChild(bookHeader);
-  const bookImg = document.createElement('img');
-  bookImg.setAttribute('class', 'main__item-header-delete');
-  bookImg.setAttribute('src', 'images/icons/close.svg');
-  bookHeader.appendChild(bookImg);
+  const bookDeleteImg = document.createElement('img');
+  bookDeleteImg.setAttribute('class', 'main__item-header-delete');
+  bookDeleteImg.setAttribute('src', 'images/icons/close.svg');
+  bookHeader.appendChild(bookDeleteImg);
+  const bookToggleReadImg = document.createElement('img');
+  const imgSrc = read ? 'eye-check-outline' : 'eye-remove-outline';
+  bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
+  bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
+  bookHeader.appendChild(bookToggleReadImg);
   
   const bookTitle = document.createElement('div');
   bookTitle.setAttribute('class', 'main__item-title');
@@ -123,3 +132,8 @@ form.addEventListener('submit', (e) => {
   form.reset();
   modal.close();
 })
+
+/*
+library[0].toggleReadStatus();
+console.log(library[0]);
+*/
