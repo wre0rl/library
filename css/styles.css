@@ -56,8 +56,8 @@ body {
   margin-top: .7rem;
 }
 
-.form__field:last-child .form__input {
-  transform: scale(1.5);
+input[type="checkbox"] {
+  transform: scale(1.8);
 }
 
 .form__label {
