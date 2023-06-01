@@ -22,6 +22,13 @@ function showBook(title, author, pages, read) {
   const book = document.createElement('div');
   book.setAttribute('class', 'main__item');
   booksContainer.appendChild(book);
+
+  const bookHeader = document.createElement('div');
+  bookHeader.setAttribute('class', 'main__item-header');
+  book.appendChild(bookHeader);
+  const bookImg = document.createElement('img');
+  bookImg.setAttribute('src', 'images/icons/close.svg');
+  bookHeader.appendChild(bookImg);
   
   const bookTitle = document.createElement('div');
   bookTitle.setAttribute('class', 'main__item-title');
