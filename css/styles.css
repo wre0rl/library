@@ -38,3 +38,19 @@ body {
   font-size: 1.3rem;
 }
 
+.form__field {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .7rem;
+}
+
+.modal {
+  width: 350px;
+}
+
+button {
+  font-size: 1.1rem;
+  background-color: #fff;
+  padding: 0.2rem .7rem;
+}
+

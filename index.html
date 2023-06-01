@@ -13,10 +13,29 @@
       Library
     </div>
     <div class="sidebar__item">
-      <button>New</button>
+      <button class="new">new book</button>
     </div>
   </div>
   <div class="main"></div>
+
+  <dialog class="modal">
+    <form class="form" action="#" method="#" novalidate>
+      <div class="form__field">
+        <label class="form__label" for="title">Title</label>
+        <input class="form__input" type="text" id="title" name="title" autocomplete="title" required>
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="author">Author</label>
+        <input class="form__input" type="text" id="author" name="author" autocomplete="author" required>
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="pages">Pages</label>
+        <input class="form__input" type="text" id="pages" name="pages" autocomplete="pages" required>
+      </div>
+    </form>
+    <button class="submit-modal">submit</button>
+    <button class="close-modal">close</button>
+  </dialog>
   <script src="scripts/index.js"></script>
 </body>
 </html>

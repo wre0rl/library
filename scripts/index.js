@@ -64,3 +64,15 @@ addBook('Time of Contempt', 'Andrzej Sapkowski', 331, false);
 getBooks();
 //deleteBook(0);
 //getBooks();
+
+const button = document.querySelector('.new');
+const modal = document.querySelector('.modal');
+const closeModal = document.querySelector('.close-modal');
+
+button.addEventListener('click', () => {
+  modal.showModal();
+});
+
+closeModal.addEventListener('click', () => {
+  modal.close();
+});
