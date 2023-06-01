@@ -13,10 +13,18 @@
       Library
     </div>
     <div class="sidebar__item">
-      <button class="new">new book</button>
+      <button class="new" type="button">new book</button>
     </div>
   </div>
   <div class="main"></div>
+
+  <dialog class="modal__delete">
+    This will delete the book permanently, you cannot undo this action.
+    <div class="modal__delete-button">
+      <button class="modal__delete-button-close" type="button">no</button>
+      <button class="modal__delete-button-submit" type="button">yes</button>
+    </div>
+  </dialog>
 
   <dialog class="modal">
     <form class="form" id="form" action="#" method="#">
@@ -38,7 +46,7 @@
       </div>
     </form>
     <div class="form__button">
-      <button class="form__button-close">close</button>
+      <button type="button" class="form__button-close">close</button>
       <button type="submit" class="form__button-submit" form="form">submit</button>
     </div>
   </dialog>

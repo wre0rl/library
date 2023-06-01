@@ -27,6 +27,7 @@ function showBook(title, author, pages, read) {
   bookHeader.setAttribute('class', 'main__item-header');
   book.appendChild(bookHeader);
   const bookImg = document.createElement('img');
+  bookImg.setAttribute('class', 'main__item-header-delete');
   bookImg.setAttribute('src', 'images/icons/close.svg');
   bookHeader.appendChild(bookImg);
   
@@ -51,8 +52,10 @@ function showBook(title, author, pages, read) {
   bookRead.innerText = read;
 }
 
-function deleteBook(index) {
+function deleteBook(title) {
+  index = library.findIndex(book => book.title === title);
   library.splice(index, 1);
+  
 }
 
 addBook('The Hobbit', 'J.R.R. Tolkien', 295, false);
@@ -72,8 +75,34 @@ getBooks();
 
 const modal = document.querySelector('.modal');
 const closeModalButton = document.querySelector('.form__button-close');
+const deleteModal = document.querySelector('.modal__delete');
+const deleteButton = 'main__item-header-delete';
+const closeDeleteModalButton = document.querySelector('.modal__delete-button-close');
+const submitDeleteModalButton = document.querySelector('.modal__delete-button-submit');
 const form = document.querySelector('.form');
 const newBookButton = document.querySelector('.new');
+let thisTitle = '';
+
+// listen to document instead each of deleteButton e.g deleteButtons.foreach()
+// so it can listen to new dynamically created element
+document.addEventListener("click", function(e){
+  const target = e.target.className;
+  
+  if(target === deleteButton){
+    thisTitle = e.target.parentElement.nextElementSibling;
+    deleteModal.showModal();
+  }
+});
+
+closeDeleteModalButton.addEventListener('click', () => {
+  deleteModal.close();
+});
+
+submitDeleteModalButton.addEventListener('click', () => {
+  deleteBook(thisTitle.innerText);
+  thisTitle.parentElement.remove(); // Delete the element from html
+  deleteModal.close();
+});
 
 newBookButton.addEventListener('click', () => {
   modal.showModal();

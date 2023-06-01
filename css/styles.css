@@ -37,9 +37,13 @@ body {
   flex-direction: column;
 }
 
-.main__item-header img {
+.main__item-header-delete {
   height: 25px;
   float: right;
+}
+
+.main__item-header-delete:hover {
+  cursor: grab;
 }
 
 .main__item-title {
@@ -70,15 +74,18 @@ body {
   outline: 0;
 }
 
-.form__button {
+.form__button,
+.modal__delete-button {
   margin-top: 1rem;
   float: right;
 }
 
-.form__button-close {
+.form__button-close,
+.modal__delete-button-close {
   margin-right: .4rem
 }
 
+.modal__delete,
 .modal {
   width: 300px;
 }
@@ -89,5 +96,10 @@ button {
   padding: 0.2rem .7rem;
   border: 4px solid #000;
   box-shadow: 4px 4px 0 0 black;
+  outline: 0;
+}
+
+button:hover {
+  cursor: grab;
 }
 
