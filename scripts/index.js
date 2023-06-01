@@ -17,6 +17,12 @@ function getBooks() {
   }
 }
 
+function deleteBook(index) {
+  library.splice(index, 1);
+}
+
 addBook('The Hobbit', 'J.R.R. Tolkien', 295, false);
 addBook('Six of Crows', 'Leigh Bardugo', 496, true);
 getBooks();
+//deleteBook(0);
+//getBooks();
