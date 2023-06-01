@@ -34,11 +34,11 @@ function showBook(title, author, pages, isRead) {
   bookDeleteImg.setAttribute('class', 'main__item-header-delete');
   bookDeleteImg.setAttribute('src', 'images/icons/close.svg');
   bookHeader.appendChild(bookDeleteImg);
-  const bookToggleReadImg = document.createElement('img');
+  const readStatusIcon = document.createElement('img');
   const imgSrc = isRead ? 'eye-check-outline' : 'eye-remove-outline';
-  bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
-  bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
-  bookHeader.appendChild(bookToggleReadImg);
+  readStatusIcon.setAttribute('class', 'main__item-header-read-status');
+  readStatusIcon.setAttribute('src', `images/icons/${imgSrc}.svg`);
+  bookHeader.appendChild(readStatusIcon);
   
   const bookTitle = document.createElement('div');
   bookTitle.setAttribute('class', 'main__item-title');
@@ -108,10 +108,10 @@ document.addEventListener("click", function(e){
     library[index].toggleReadStatus();
 
     // Rerender
-    const bookToggleReadImg = thisTitle.previousElementSibling.lastChild;
+    const readStatusIcon = thisTitle.previousElementSibling.lastChild;
     const imgSrc = library[index].isRead ? 'eye-check-outline' : 'eye-remove-outline';
-    bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
-    bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
+    readStatusIcon.setAttribute('class', 'main__item-header-read-status');
+    readStatusIcon.setAttribute('src', `images/icons/${imgSrc}.svg`);
 
     const readStatus = thisTitle.parentElement.lastChild;
     readStatus.innerText = library[index].isRead;
