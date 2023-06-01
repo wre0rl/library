@@ -64,7 +64,6 @@ function showBook(title, author, pages, read) {
 function deleteBook(title) {
   index = library.findIndex(book => book.title === title);
   library.splice(index, 1);
-  
 }
 
 addBook('The Hobbit', 'J.R.R. Tolkien', 295, false);
@@ -86,6 +85,7 @@ const modal = document.querySelector('.modal');
 const closeModalButton = document.querySelector('.form__button-close');
 const deleteModal = document.querySelector('.modal__delete');
 const deleteButton = 'main__item-header-delete';
+const toggleReadStatusButton = 'main__item-header-read-status';
 const closeDeleteModalButton = document.querySelector('.modal__delete-button-close');
 const submitDeleteModalButton = document.querySelector('.modal__delete-button-submit');
 const form = document.querySelector('.form');
@@ -97,9 +97,24 @@ let thisTitle = '';
 document.addEventListener("click", function(e){
   const target = e.target.className;
   
-  if(target === deleteButton){
+  if (target === deleteButton) {
     thisTitle = e.target.parentElement.nextElementSibling;
     deleteModal.showModal();
+  }
+
+  if (target === toggleReadStatusButton) {
+    thisTitle = e.target.parentElement.nextElementSibling;
+    const index = library.findIndex(book => book.title === thisTitle.innerText);
+    library[index].toggleReadStatus();
+
+    // Rerender
+    const bookToggleReadImg = thisTitle.previousElementSibling.lastChild;
+    const imgSrc = library[index].read ? 'eye-check-outline' : 'eye-remove-outline';
+    bookToggleReadImg.setAttribute('class', 'main__item-header-read-status');
+    bookToggleReadImg.setAttribute('src', `images/icons/${imgSrc}.svg`);
+
+    const readStatus = thisTitle.parentElement.lastChild;
+    readStatus.innerText = library[index].read;
   }
 });
 
@@ -131,9 +146,4 @@ form.addEventListener('submit', (e) => {
   showBook(data.title, data.author, data.pages, readStatus);
   form.reset();
   modal.close();
-})
-
-/*
-library[0].toggleReadStatus();
-console.log(library[0]);
-*/
+});
