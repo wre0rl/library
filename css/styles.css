@@ -1,0 +1,33 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  padding: 3rem;
+}
+
+.sidebar__title {
+  font-size: 2rem;
+}
+
+.sidebar__item {
+  margin-top: 1rem;
+}
+
+.main {
+  padding: 3rem;
+  font-size: 1.3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.main__item {
+  border: 1px solid #000;
+  padding: 2rem;
+}
+
