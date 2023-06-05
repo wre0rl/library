@@ -98,12 +98,12 @@ const UI = (function() {
   }
 
   const createReadButton = (parent, isRead) => {
-    const isReadButton = document.createElement('img');
-    const isReadIcon = isRead ? 'eye-check-outline' : 'eye-remove-outline';
-    isReadButton.classList.add('.main__item-header-delete');
-    isReadButton.setAttribute('class', 'main__item-header-read-status');
-    isReadButton.setAttribute('src', `images/icons/${isReadIcon}.svg`);
-    parent.appendChild(isReadButton);
+    const readButton = document.createElement('img');
+    const readIcon = isRead ? 'eye-check-outline' : 'eye-remove-outline';
+    readButton.classList.add('.main__item-header-delete');
+    readButton.setAttribute('class', 'main__item-header-read-status');
+    readButton.setAttribute('src', `images/icons/${readIcon}.svg`);
+    parent.appendChild(readButton);
   }
 
   Mediator.subscribe('bookAdded', render);
