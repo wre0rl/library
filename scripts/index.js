@@ -1,3 +1,33 @@
+const Mediator = (function() {
+  const subscribers = {};
+
+  function subscribe(eventType, fn) {
+    if (!subscribers[eventType]) {
+      subscribers[eventType] = [];
+    }
+    subscribers[eventType].push(fn);
+  };
+
+  function unsubscribe(eventType, fn) {
+    subscribers[eventType] = subscribers[eventType].filter(
+      subscriber => subscriber !== fn
+    );
+  };
+
+  function publish(eventType, data) {
+    if (!subscribers[eventType]) {
+      return;
+    }
+    subscribers[eventType].forEach(subscriber => subscriber(data));
+  };
+
+  return {
+    subscribe,
+    unsubscribe,
+    publish
+  };
+})();
+
 class Book {
   constructor(title, author, pages, isRead) {
     this.title = title;
@@ -16,6 +46,7 @@ class Library {
 
   add(book) {
     this.books.push(book);
+    Mediator.publish('bookAdded', book);
   }
 
   remove(title) {
@@ -28,8 +59,6 @@ class Library {
 }
 
 const UI = (function() {
-  // 1. Handle click
-  // 2. Handle render (done)
   const libraryContainer = document.querySelector('.main');
 
   const render = (book) => {
@@ -77,16 +106,11 @@ const UI = (function() {
     parent.appendChild(isReadButton);
   }
 
-  return {
-    render
-  }
+  Mediator.subscribe('bookAdded', render);
 })();
 
 const library = new Library();
 const book = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 library.add(book);
-console.log(book);
-//console.log(library.get());
 //library.remove(book.title);
 //console.log(library.get());
-UI.render(book);
