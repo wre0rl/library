@@ -138,7 +138,7 @@ const DOM = (function() {
     hideModal(modal);
   };
 
-  function handleDelete(e) {
+  const handleDelete = (e) => {
     const book = getClickedTitle();
     const title = book.innerText;
     library.remove(title);
