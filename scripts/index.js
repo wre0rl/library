@@ -25,6 +25,10 @@ class Library {
   get() {
     return this.books;
   }
+
+  findIndex(title) {
+    return this.books.findIndex(book => book.title === title);
+  }
 }
 
 const Render = (function() {
@@ -68,17 +72,28 @@ const Render = (function() {
 
   const createReadButton = (parent, isRead) => {
     const readButton = document.createElement('img');
-    const readIcon = isRead ? 'eye-check-outline' : 'eye-remove-outline';
     readButton.classList.add('main__item-header-read-status');
-    readButton.setAttribute('src', `images/icons/${readIcon}.svg`);
+    decideReadIcon(readButton, isRead);
     parent.appendChild(readButton);
+  }
+
+  const decideReadIcon = (iconDiv, isRead) => {
+    const icon = isRead ? 'eye-check-outline' : 'eye-remove-outline';
+    iconDiv.setAttribute('src', `images/icons/${icon}.svg`);
+  };
+
+  const updateReadText = (div, isRead) => {
+    const isReadDiv = div.parentElement.lastChild;
+    isReadDiv.innerText = isRead;
   }
 
   const unrender = (book) => book.parentElement.remove();
 
   return {
     render,
-    unrender
+    unrender,
+    decideReadIcon,
+    updateReadText
   }
 })();
 
@@ -140,17 +155,47 @@ const DOM = (function() {
 
   const handleActions = (e) => {
     const deleteButtonClass = '.main__item-header-delete';
-    //const readButtonClass = '.main__item-header-read-status';
+    const readButtonClass = '.main__item-header-read-status';
     console.log();
     if (e.target.matches(deleteButtonClass)) {
       showModal(deleteModal);
       setClickedTitle(e);
+      return;
+    }
+
+    if (e.target.matches(readButtonClass)) {
+      setClickedTitle(e);
+      const titleDiv = getClickedTitle();
+      const titleText = titleDiv.innerText;  
+      const booksInLibrary = library.get();
+      const bookIndex = library.findIndex(titleText);
+      const book = booksInLibrary[bookIndex];
+      book.toggleRead();
+      Render.decideReadIcon(titleDiv.previousElementSibling.lastChild, book.isRead);
+      Render.updateReadText(titleDiv, book.isRead);
+      return;
     }
   };
 })();
 
 // Init
 const library = new Library();
-const book = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-library.add(book);
-Render.render(book);
+const books = [
+  new Book('The Hobbit', 'J.R.R. Tolkien', 295, false),
+  new Book('To Kill a Mockingbird', 'Harper Lee', 281, true),
+  new Book('1984', 'George Orwell', 328, true),
+  new Book('Pride and Prejudice', 'Jane Austen', 279, true),
+  new Book('The Great Gatsby', 'F. Scott Fitzgerald', 180, false),
+  new Book('The Catcher in the Rye', 'J.D. Salinger', 277, false),
+  new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 417, false),
+  new Book('War and Peace', 'Leo Tolstoy', 1392, false),
+  new Book('The Lord of the Rings', 'J.R.R. Tolkien', 1178, true),
+  new Book('Animal Farm', 'George Orwell', 112, true),
+  new Book('The Picture of Dorian Gray', 'Oscar Wilde', 254, true),
+  new Book('Brave New World', 'Aldous Huxley', 311, false)
+];
+
+for (const book of books) {
+  library.add(book);
+  Render.render(book);
+}
